@@ -1,13 +1,18 @@
-import Spline from '@splinetool/react-spline';
+import SafeSpline from './SafeSpline';
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
+      {/* Background: gradient as safe fallback */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-violet-50" />
+
+      {/* 3D scene (won't block interaction if it fails) */}
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/7o3bK1z5c8m8Z2Jm/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        <SafeSpline scene="https://prod.spline.design/7o3bK1z5c8m8Z2Jm/scene.splinecode" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-32">
+      {/* Content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-32">
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs font-medium text-gray-700 backdrop-blur">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
@@ -26,6 +31,7 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Soft overlay that does not block interactions */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white" />
     </section>
   );
